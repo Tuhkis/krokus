@@ -1,0 +1,6 @@
+[submodule "external/sr"]
+	path = external/sr
+	url = https://github.com/Tuhkis/simple-renderer
+[submodule "external/glfw-ez"]
+	path = external/glfw-ez
+	url = https://github.com/Tuhkis/glfw-ez

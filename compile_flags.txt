@@ -1,0 +1,7 @@
+-I./external
+-I./external/cph
+-I./external/glfw-ez/glfw/include/GLFW
+-I./external/ll
+-I./external/sr
+-I./src/native
+
