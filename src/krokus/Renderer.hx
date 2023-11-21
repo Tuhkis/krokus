@@ -8,6 +8,7 @@ class Renderer {
 
   private static function rendererCreateNative(width: Int, height: Int): RendererPtr {return null;}
   private static function rendererDisposeNative(r: RendererPtr): Void {}
+  private static function rendererClearNative(r: RendererPtr): Void {}
 
   public function new(width: Int, height: Int) {
     ptr = rendererCreateNative(width, height);
@@ -15,5 +16,9 @@ class Renderer {
 
   public inline function dispose() {
     rendererDisposeNative(ptr);
+  }
+
+  public inline function clear() {
+    rendererClearNative(ptr);
   }
 }

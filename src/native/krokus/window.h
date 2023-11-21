@@ -17,6 +17,7 @@ HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* tit
 HL_PRIM void HL_NAME(window_dispose_native) (Window* win);
 HL_PRIM bool HL_NAME(window_should_close_native) (Window* win);
 HL_PRIM void HL_NAME(window_poll_events_native) (void);
+HL_PRIM void HL_NAME(window_swap_buffers_native) (Window* win);
 
 #endif // WINDOW_H
 

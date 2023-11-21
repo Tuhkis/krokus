@@ -14,6 +14,7 @@ typedef struct {
 
 HL_PRIM Renderer* HL_NAME(renderer_create_native) (S32 width, S32 height);
 HL_PRIM void HL_NAME(renderer_dispose_native) (Renderer* render);
+HL_PRIM void HL_NAME(renderer_clear_native) (Renderer* render);
 
 #endif // RENDERER_H
 

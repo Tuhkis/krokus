@@ -11,6 +11,7 @@ class Window {
   private static function windowDisposeNative(window: WindowPtr) {}
   private static function windowShouldCloseNative(window: WindowPtr): Bool {return true;}
   private static function windowPollEventsNative(): Void {};
+  private static function windowSwapBuffersNative(window: WindowPtr) {}
 
   public static inline function init() { windowSystemInitNative(); }
   public static inline function pollEvents() { windowPollEventsNative(); }
@@ -25,5 +26,9 @@ class Window {
 
   public inline function shouldClose(): Bool {
     return windowShouldCloseNative(ptr);
+  }
+
+  public inline function swapBuffers(): Void {
+    windowSwapBuffersNative(ptr);
   }
 }
