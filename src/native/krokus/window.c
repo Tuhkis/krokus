@@ -21,12 +21,12 @@ HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* tit
   return ret;
 }
 
-HL_PRIM void HL_NAME(window_dispose_native) (Window* win) {
+HL_PRIM U0 HL_NAME(window_dispose_native) (Window* win) {
   glfwDestroyWindow(win->win);
   free(win);
 }
 
-HL_PRIM void HL_NAME(window_system_init_native) (void) {
+HL_PRIM U0 HL_NAME(window_system_init_native) (U0) {
   ASSERT(glfwInit() != GLFW_FALSE);
   glfwWindowHint(GLFW_SAMPLES, 4);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
@@ -39,11 +39,11 @@ HL_PRIM bool HL_NAME(window_should_close_native) (Window* win) {
   return glfwWindowShouldClose(win->win);
 }
 
-HL_PRIM void HL_NAME(window_poll_events_native) (void) {
+HL_PRIM U0 HL_NAME(window_poll_events_native) (U0) {
   glfwPollEvents();
 }
 
-HL_PRIM void HL_NAME(window_swap_buffers_native) (Window* win) {
+HL_PRIM U0 HL_NAME(window_swap_buffers_native) (Window* win) {
   glfwSwapBuffers(win->win);
 }
 

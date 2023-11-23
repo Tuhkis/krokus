@@ -42,7 +42,7 @@ class Renderer {
     rendererSetClearColorNative(color.r, color.g, color.b);
   }
 
-  public inline function pushTriangle(a: Vec2, b: Vec2, c: Vec2, aUv: Vec2, bUv: Vec2, cUv: Vec2, aColor: Color, bColor: Color, cColor: Color, texture: Int): Void {
+  public inline function pushTriangle(a: Vec2, b: Vec2, c: Vec2, aUv: Vec2, bUv: Vec2, cUv: Vec2, aColor: Color, bColor: Color, cColor: Color, texture: Texture): Void {
     rendererPushTriangleNative(ptr,
       a.x, a.y, b.x, b.y, c.x, c.y,
       aUv.x, aUv.y, bUv.x, bUv.y, cUv.x, cUv.y,
