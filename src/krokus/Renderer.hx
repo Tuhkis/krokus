@@ -10,17 +10,11 @@ class Renderer {
   private static function rendererDisposeNative(r: RendererPtr): Void {}
   private static function rendererClearNative(r: RendererPtr): Void {}
   private static function rendererSetClearColorNative(r: Single, g: Single, b: Single): Void {}
-  private static function rendererPushTriangleNative(
+  private static function rendererPushRectNative(
     renderer: RendererPtr,
     x0: Single, y0: Single,
-    x2: Single, y1: Single,
-    x1: Single, y2: Single,
-    uv0x: Single, uv0y: Single,
-    uv2x: Single, uv1y: Single,
-    uv1x: Single, uv2y: Single,
+    x1: Single, y1: Single,
     r0: Single, g0: Single, b0: Single, a0: Single,
-    r1: Single, g1: Single, b1: Single, a1: Single,
-    r2: Single, g2: Single, b2: Single, a2: Single,
     texture: Int
   ): Void {}
   private static function rendererBeginNative(r: RendererPtr): Void {}
@@ -42,15 +36,8 @@ class Renderer {
     rendererSetClearColorNative(color.r, color.g, color.b);
   }
 
-  public inline function pushTriangle(a: Vec2, b: Vec2, c: Vec2, aUv: Vec2, bUv: Vec2, cUv: Vec2, aColor: Color, bColor: Color, cColor: Color, texture: Texture): Void {
-    rendererPushTriangleNative(ptr,
-      a.x, a.y, b.x, b.y, c.x, c.y,
-      aUv.x, aUv.y, bUv.x, bUv.y, cUv.x, cUv.y,
-      aColor.r, aColor.g, aColor.b, aColor.a,
-      bColor.r, bColor.g, bColor.b, bColor.a,
-      cColor.r, cColor.g, cColor.b, cColor.a,
-      texture
-    );
+  public inline function pushRect(pos: Vec2, dims: Vec2, color: Color, texture: Texture): Void {
+    rendererPushRectNative(ptr, pos.x, pos.y, dims.x, dims.y, color.r, color.g, color.b, color.a, texture);
   }
 
   public inline function begin() {

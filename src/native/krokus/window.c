@@ -6,9 +6,9 @@
 #include "window.h"
 
 HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* title, int title_len) {
-  Window* ret = malloc(sizeof(Window));
+  mut Window* ret = malloc(sizeof(Window));
 
-  char title_buf[title_len + 1];
+  mut char title_buf[title_len + 1];
   title_buf[title_len] = 0;
   chars_from_vbytes(title_buf, title, title_len);
 
@@ -17,7 +17,7 @@ HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* tit
   glfwMakeContextCurrent(ret->win);
 	glfwSwapInterval(0);
 	sr_load_loader(glfwGetProcAddress);
-  
+
   return ret;
 }
 
