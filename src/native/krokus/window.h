@@ -9,7 +9,9 @@
 #define TWINDOW _ABSTRACT(krokus_window)
 
 typedef struct {
+  F32 scale;
   GLFWwindow* win;
+  S32 width, height;
 } Window;
 
 HL_PRIM U0 HL_NAME(window_system_init_native) (U0);

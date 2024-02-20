@@ -5,6 +5,7 @@ typedef WindowPtr = hl.Abstract<"krokus_window">
 @:hlNative('krokus')
 class Window {
   private var ptr: WindowPtr;
+  static private var initialised: Bool = false;
 
   private static function windowSystemInitNative(): Void {}
   private static function windowCreateNative(width: Int, height: Int, title: hl.Bytes, titleLen: Int): WindowPtr {return null;}
@@ -13,10 +14,13 @@ class Window {
   private static function windowPollEventsNative(): Void {};
   private static function windowSwapBuffersNative(window: WindowPtr) {}
 
-  public static inline function init() { windowSystemInitNative(); }
   public static inline function pollEvents() { windowPollEventsNative(); }
 
   public function new(width: Int, height: Int, title: String) {
+    if (!initialised) {
+      windowSystemInitNative();
+      initialised = true;
+    }
     ptr = windowCreateNative(width, height, cast (title, HString).toBytes(), title.length);
   }
 

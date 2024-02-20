@@ -5,6 +5,12 @@
 #include "util.h"
 #include "window.h"
 
+U0 window_size_callback(GLFWwindow* window, S32 width, S32 height) {
+  Window* win = glfwGetWindowUserPointer(window);
+  // glfwSetWindowSize(window, width, height);
+  glViewport(0, height / (width * win->scale), height * win->scale, height);
+}
+
 HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* title, int title_len) {
   mut Window* ret = malloc(sizeof(Window));
 
@@ -13,7 +19,10 @@ HL_PRIM Window* HL_NAME(window_create_native) (S32 width, S32 height, vbyte* tit
   chars_from_vbytes(title_buf, title, title_len);
 
   ret->win = glfwCreateWindow(width, height, title_buf, nullptr, nullptr);
+  ret->scale = (float)(width) / (float)(height);
   ASSERT(ret->win != nullptr);
+  glfwSetWindowUserPointer(ret->win, ret);
+  glfwSetWindowSizeCallback(ret->win, window_size_callback);
   glfwMakeContextCurrent(ret->win);
 	glfwSwapInterval(0);
 	sr_load_loader(glfwGetProcAddress);
@@ -45,6 +54,10 @@ HL_PRIM U0 HL_NAME(window_poll_events_native) (U0) {
 
 HL_PRIM U0 HL_NAME(window_swap_buffers_native) (Window* win) {
   glfwSwapBuffers(win->win);
+}
+
+HL_PRIM U0 HL_NAME(window_set_resizable) (Window* win, bool resizable) {
+
 }
 
 DEFINE_PRIM(TWINDOW, window_create_native, _I32 _I32 _BYTES _I32)
