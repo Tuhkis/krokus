@@ -2,7 +2,7 @@ package krokus;
 
 class Color {
   public static final RED = new Color(1.0, 0.2, 0.2, 1.0);
-  public static final BLUE = new Color(0.2, 0.2, 1.0, 1.0);
+  public static final BLUE = new Color(0.4, 0.6, 1.0, 1.0);
   public static final GREY = new Color(0.2, 0.2, 0.2, 1.0);
 
   public var r: Single = 0.0;

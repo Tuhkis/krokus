@@ -8,6 +8,9 @@ class Clock {
   private static function delay_native(ms: Single): Void {}
   private static function get_time_native(): Single { return 0.0; }
 
+  public static inline function getTime(): Single { return get_time_native(); }
+  public static inline function delay(ms: Single): Void { delay_native(ms); }
+
   public function new() {}
 
   public inline function tick(fps: Single): Single {
@@ -17,7 +20,5 @@ class Clock {
     delay_native(1000.0 / fps);
     return delta;
   }
-
-  public inline function getTime(): Single { return get_time_native(); }
 }
 
