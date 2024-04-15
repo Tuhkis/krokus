@@ -1,6 +1,6 @@
 package krokus;
 
-class App {
+abstract class App {
   private var win: Window;
 
   public var g: Renderer;
@@ -15,8 +15,11 @@ class App {
     g = new Renderer(width, height);
     g.setClearColor(Color.BLUE);
 
-    while (!win.shouldClose()) {
+    init();
+
+    while (true) {
       Window.pollEvents();
+      if (win.shouldClose()) break;
       now = Clock.getTime();
       deltaTime = now - prev;
       prev = now;
@@ -26,14 +29,22 @@ class App {
       render();
       g.end();
       win.swapBuffers();
-      if (fps > 0)
+      if (fps > 0.75)
         Clock.delay(1000.0 / fps);
     }
-    g.dispose();
-    win.dispose();
+    quit();
   }
 
-  public function tick(deltaTime: Single) {}
-  public function render() {}
+  public function quit() {
+    shutdown();
+    g.dispose();
+    win.dispose();
+    Sys.exit(0);
+  }
+
+  abstract function tick(deltaTime: Single): Void;
+  abstract function render(): Void;
+  abstract function init(): Void;
+  abstract function shutdown(): Void;
 }
 

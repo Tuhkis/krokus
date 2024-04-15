@@ -7,6 +7,7 @@ HL_PRIM Renderer* HL_NAME(renderer_create_native) (S32 width, S32 height) {
   ret->renderer = (sr_Renderer) default_initialiser;
   sr_init(&ret->renderer, width, height);
   ret->colour = sr_vec4(1, 1, 1, 1);
+  ret->uv = sr_vec4(0, 0, 1, 1);
 
   glClearColor(.2f, .2f, .2f, 1.f);
 
@@ -32,7 +33,27 @@ HL_PRIM U0 HL_NAME(renderer_push_rect_native) (
   F32 x1, F32 y1,
   S32 texture
 ) {
-  sr_render_push_quad(&renderer->renderer, sr_vec2(x0, y0), sr_vec2(x1, y1), renderer->colour, texture);
+  // sr_render_push_quad(&renderer->renderer, sr_vec2(x0, y0), sr_vec2(x1, y1), renderer->colour, texture);
+
+  sr_render_push_triangle(
+    &renderer->renderer,
+    sr_vec2(x0, y0),
+    sr_vec2(x0 + x1, y0), sr_vec2(x0, y0 + y1),
+    renderer->colour,
+    renderer->colour,
+    renderer->colour,
+    sr_vec2(renderer->uv.x, renderer->uv.y),
+    sr_vec2(renderer->uv.z, renderer->uv.y),
+    sr_vec2(renderer->uv.x, renderer->uv.w), texture);
+
+  sr_render_push_triangle(&renderer->renderer,
+    sr_vec2(x0 + x1, y0 + y1),
+    sr_vec2(x0 + x1, y0),
+    sr_vec2(x0, y0 + y1),
+    renderer->colour, renderer->colour, renderer->colour,
+    sr_vec2(renderer->uv.z, renderer->uv.w),
+    sr_vec2(renderer->uv.z, renderer->uv.y),
+    sr_vec2(renderer->uv.x, renderer->uv.w), texture);
 }
 
 HL_PRIM U0 HL_NAME(renderer_begin_native) (Renderer* renderer) {

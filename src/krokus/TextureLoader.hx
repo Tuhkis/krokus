@@ -10,11 +10,11 @@ class TextureLoader {
     return textureGetWhiteNative();
   }
 
-  public static inline function loadTextureRGB(path: String): Texture {
+  public static inline function loadRGB(path: String): Texture {
     return loadTextureRgbNative(cast (path, HString).toBytes(), path.length);
   }
 
-  public static inline function loadTextureRGBA(path: String): Texture {
+  public static inline function loadRGBA(path: String): Texture {
     return loadTextureRgbaNative(cast (path, HString).toBytes(), path.length);
   }
 }

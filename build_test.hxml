@@ -1,4 +1,4 @@
 -cp src
 -main krokus.Test
--hl bin_c/krokus.c
+-hl bin/krokus.hl
 

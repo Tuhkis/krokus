@@ -11,6 +11,7 @@
 typedef struct {
   sr_Renderer renderer;
   sr_Vec4 colour;
+  sr_Vec4 uv;
 } Renderer;
 
 HL_PRIM Renderer* HL_NAME(renderer_create_native) (S32 width, S32 height);
